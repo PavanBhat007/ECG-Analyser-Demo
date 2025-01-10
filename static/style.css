@@ -128,7 +128,43 @@ button:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.report-container .user-details {
-    display: flex;
-    justify-content: space-between;
+table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #444;
+    padding: 10px;
+}
+
+th {
+    background-color: #333;
+    color: #ffffff;
+}
+
+td {
+    color: #cccccc;
+}
+
+h2 {
+    margin-top: 30px;
+    color: #00bcd4;
+}
+
+.user-details, .file-info, .parameters {
+    margin-bottom: 30px;
+}
+
+.parameters table {
+    margin-top: 20px;
+}
+
+.parameters th {
+    width: fit-content;
+}
+
+.parameters td {
+    width: 20%;
 }

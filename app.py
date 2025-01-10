@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 
 from paramex import extract_ecg_features
 from predict import predict
-from utils import extract_form_data
+from utils import extract_form_data, update_col_names
 
 app = Flask(__name__)
 app.secret_key = "JNBPRKS"
@@ -37,22 +37,34 @@ def upload_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
 
-        file_info, params = extract_ecg_features(filepath)
-        params["age"] = age
-        params["sex"] = sex
+        if 'PRE_DAC' in filepath:
+            class_val = 1
+        else:
+            class_val = 0
+
+        file_info, params = extract_ecg_features(filepath)        
+        user_info = {
+            "Name": name,
+            "Age": age,
+            "Sex": "Male" if sex == 0 else "Female"
+        }
         
-        prediction = predict(params)
+        params = update_col_names(params)
+        
+        features = params.copy()
+        features.update({"age": age})
+        features.update({"gender": sex})
+        features.update({"class": class_val})
+        prediction = predict(features)
         prediction = "Normal" if prediction == 0 else "Specimen"
         
         try:
             return render_template(
                 'report.html',
-                name=name,
-                gender=sex,
-                age=age,
+                user_info=user_info,
                 file_info=file_info,
                 parameters=params,
-                pred=prediction
+                pred=prediction,
             )
             
         except Exception as e:

@@ -23,12 +23,12 @@ def extract_ecg_features(adi_file_path):
         fs = int(ecg_channel.fs[0])
         
         file_info = {
-            'n_records': ecg_channel.n_records,
-            'n_ecg_rested': ecg_channel.n_samples[0],
-            'n_ecg_tilted': sum(ecg_channel.n_samples[1:-1]),
-            'ticks': ecg_channel.tick_dt[0],
-            'fs': fs,
-            'units': ecg_channel.units[0]
+            'Number of record': ecg_channel.n_records,
+            'Number of Rested ECG samples': ecg_channel.n_samples[0],
+            'Number of Tilted ECG samples': sum(ecg_channel.n_samples[1:-1]),
+            'Tick Rate': ecg_channel.tick_dt[0],
+            'Sampling Frequency': fs,
+            'Unit': ecg_channel.units[0]
         }
         
         data = np.array(ecg_channel.get_data(1)[:300000]) # 5 minutes of data
@@ -95,23 +95,24 @@ def extract_ecg_features(adi_file_path):
                 'avg_heart_rate': avg_hr,
                 'mean_rr': mean_rr,
                 'std_rr': sdrr,
-                'hr_diff': hr_diff,
-                'hr_diff_percent': hr_diff_percent,
+                # 'hr_diff': hr_diff,
+                # 'hr_diff_percent': hr_diff_percent,
+                'sdnn': sdrr,
                 'sdnni': sdnni,
                 'rmssd': rmssd,
-                'pnn50': pnn50,
-                'sdann': sdann,
+                # 'pnn50': pnn50,
+                # 'sdann': sdann,
                 'hrv_triangular_index': hrv_triangular_index,
                 'tinn': tinn,
-                'ulf_power': ulf_power,
-                'vlf_power': vlf_power,
+                # 'ulf_power': ulf_power,
+                # 'vlf_power': vlf_power,
                 'lf_power': lf_power,
                 'hf_power': hf_power,
                 'lf_hf_ratio': lf_hf_ratio,
                 'sd1': sd1,
                 'sd2': sd2,
-                'apen': apen,
-                'sampen': sampen,
+                # 'apen': apen,
+                # 'sampen': sampen,
             }
 
         except Exception as e:

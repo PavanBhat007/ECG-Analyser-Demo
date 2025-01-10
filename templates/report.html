@@ -4,21 +4,44 @@
 
 <div class="report-container">
     <h1>Upload Successful</h1>
+    
     <h2>User Details</h2>
     <div class="user-details">
-        <p><strong>Name:</strong> {{ name }}</p>
-        <p><strong>Gender:</strong> {{ gender }}</p>
-        <p><strong>Age:</strong> {{ age }}</p>
+        <table>
+            <tr>
+                {% for key, val in user_info.items() %}
+                    <th>{{key}}</th>
+                    <td><strong>{{val}}</strong></td>
+                {% endfor %}
+            </tr>
+        </table>
     </div>
 
     <h2>File Information</h2>
     <div class="file-info">
-        <p>{{ file_info }}</p>
+        <table>
+            <tr>
+                {% for key, val in file_info.items() %}
+                    <th>{{key}}: </th>
+                    <td><strong>{{val}}</strong></td>
+                {% endfor %}
+            </tr>
+        </table>
     </div>
     
     <h2>ECG Parameters</h2>
     <div class="parameters">
-        <p>{{ parameters }}</p>
+        {% set param_list = parameters.items() | list %}
+        {% for i in range(0, param_list | length, 5) %}
+            <table>
+                <tr>
+                    {% for key, val in param_list[i:i+5] %}
+                        <th>{{key}}: </th>
+                        <td><strong>{{val if val is not float else val | round(2)}}</strong></td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
     </div>
 
     <h1>Prediction: {{ pred }}</h1>
