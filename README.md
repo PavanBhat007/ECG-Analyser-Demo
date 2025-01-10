@@ -17,3 +17,4 @@ Basic project demo for an ECG analyzer that takes .adicht ECG file as input, and
 1. Enter the user details -> name, age, gender.
 2. Upload the ECG file. It must be a LabChart file having the extension `.adicht`.
 3. Click submit, and the analysis report will be displayed.
+4. The uploaded file will be saved in the uploads folder.
