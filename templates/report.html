@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Report{% endblock %}
+{% block body %}
+
+<div class="report-container">
+    <h1>Upload Successful</h1>
+    <h2>User Details</h2>
+    <div class="user-details">
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Gender:</strong> {{ gender }}</p>
+        <p><strong>Age:</strong> {{ age }}</p>
+    </div>
+
+    <h2>File Information</h2>
+    <div class="file-info">
+        <p>{{ file_info }}</p>
+    </div>
+    
+    <h2>ECG Parameters</h2>
+    <div class="parameters">
+        <p>{{ parameters }}</p>
+    </div>
+
+    <h1>Prediction: {{ pred }}</h1>
+</div>
+
+{% endblock %}
